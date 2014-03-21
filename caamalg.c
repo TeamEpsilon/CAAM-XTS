@@ -2060,6 +2060,22 @@ static struct caam_alg_template driver_algs[] = {
 			.ivsize = DES_BLOCK_SIZE,
 			},
 		.class1_alg_type = OP_ALG_ALGSEL_DES | OP_ALG_AAI_CBC,
+	},
+	{
+		.name = "xts(aes)",
+		.driver_name = "xts-aes-caam",
+		.blocksize = AES_BLOCK_SIZE,
+		.type = CRYPTO_ALG_TYPE_ABLKCIPHER,
+		.template_ablkcipher = {
+		     .setkey = ablkcipher_setkey,
+		     .encrypt = ablkcipher_encrypt,
+		     .decrypt = ablkcipher_decrypt,
+		     .geniv = "eseqiv",
+		     .min_keysize = AES_MIN_KEY_SIZE,
+		     .max_keysize = AES_MAX_KEY_SIZE,
+		     .ivsize = AES_BLOCK_SIZE,
+		},
+		.class1_alg_type = OP_ALG_ALGSEL_AES | OP_ALG_AAI_XTS,
 	}
 };
 
